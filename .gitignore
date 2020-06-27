@@ -1,0 +1,8 @@
+.DS_Store
+config.py
+shell.py
+R/src
+R/__pycache__
+R/pdf
+R/probability*
+R/.vscode

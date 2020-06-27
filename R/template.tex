@@ -1,0 +1,163 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc} 
+\usepackage{libertine}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[varqu,varl]{zi4}% inconsolata for mono, not LibertineMono
+\usepackage{amsthm}
+\usepackage{libertinegc}
+\usepackage{libertinust1math}
+\usepackage[scr=boondoxo,bb=boondox]{mathalfa}
+\usepackage[russian]{babel}
+%\usepackage{mathastext} 
+\usepackage[usenames]{color}
+%\usepackage{amssymb}
+% \usepackage{latexsym}
+\usepackage[11pt]{moresize}
+ %\usepackage{mathspec}
+%\makeatletter % undo the wrong changes made by mathspec
+%\let\RequirePackage\original@RequirePackage
+%\let\usepackage\RequirePackage
+%\makeatother
+\usepackage{geometry} 
+\usepackage{hyperref} 
+\usepackage{fancyhdr}
+\usepackage{pgfplots}
+\usepackage{pgfornament}
+\usepackage{colortbl}
+\usepackage{paratype}
+\usepackage{comment}
+\usepackage{icomma}
+\usepackage{anyfontsize}
+\usepackage{tabularx}
+%\usepackage{alphabeta}
+%\usepackage{fontspec}
+%\usepackage{mdsymbol}
+\usepackage{xifthen}
+\usepackage{xparse}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage[most]{tcolorbox}
+%\usepackage{kantlipsum}
+\usepackage{xcolor,colortbl}
+\usepackage[bf]{caption}
+
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+\def \P{\mathbb{P}}
+
+\libertine 
+%\DeclareOldFontCommand{\sbseries}{\fontseries{sb}\selectfont}{\mathbf}
+%\DeclareTextFontCommand{\textsb}{\sbseries}
+\geometry{top=20mm} 
+\geometry{left=18mm}
+\geometry{right=18mm}
+\geometry{bottom=20mm} 
+\renewcommand{\rmdefault}{cmr}
+%\setmainfont{Myriad Pro} 
+%\setmathsfont(Digits,Latin){Myriad Pro}
+%\setmathsfont(Greek){MdSymbol}
+%\setmonofont{Courier New}
+%\setmathfont{Courier New}
+\renewcommand{\theenumii}{\asbuk{enumii}} 
+%\newfontfamily\semibf{Myriad Pro Semibold}
+\tcbuselibrary{skins, breakable, theorems}
+\newtcbexternalizeenvironment{extabular}{tabular}{}{\par\centering}{\par}
+\newcommand{\card}[1]{ \ifthenelse{\equal{#1}{}}{}{(#1)}}
+\newcommand{\probname}[1]{\ifthenelse{\equal{#1}{}}{}{\textbf{.} #1}}
+% \newcommand{\authorship}[1][]{\ifthenelse{\equal{#1}{}}{}{\tcblower \hfill \emph{#1}}}
+% \tcbset{after title={\hfill \textit{30 баллов}}}
+\tcbset{before upper={\parindent1.5em}}
+\newtcolorbox{titleframe}[2][]{after skip=1em,
+colframe=blue!75!black, colback=white, lower separated=false, righthand width=3.5cm, sidebyside, sidebyside gap=6mm, sidebyside align=top seam, left=2mm,  bottom=1mm,
+%colframe=blue!75!white, 
+% coltitle=black, 
+% after title={\hfill \large \textbf{(30 баллов)}},
+%enhanced,
+% colbacktitle=gray!75!black,
+% colbacktitle=white,
+% attach boxed title to top center={yshift=-2mm},
+title=\Large\textbf{#2}}
+\newtcolorbox{thesolution}[1][]{after skip=1em, left=2mm, top=1mm, bottom=1mm, right=1mm,
+colback=white, 
+breakable,
+colframe=orange, 
+% coltitle=black, 
+%enhanced,
+% colbacktitle=gray!75!black,
+% colbacktitle=white,
+% attach boxed title to top center={yshift=-2mm},
+title={\textbf{Ответы}}}
+\newtcbtheorem{mytheo}{\Large Определение}%
+{ left=2mm, top=1mm, bottom=1mm, right=1mm, colback=green!5,colframe=green!35!black,fonttitle=\bfseries,breakable}{th}
+\newcounter{prob}
+\setcounter{prob}{1}
+
+\hypersetup{colorlinks=true, allcolors=blue}
+
+\newcommand{\olympmargins}[1][]{\newgeometry{top=25mm, bottom=15mm, right=17.5mm, left=17.5mm}}
+
+\usepackage{enumitem}
+%\setlist{}
+
+\newboolean{showanswers}
+\setboolean{showanswers}{false} % Здесь true, чтобы ответы показывались, false -- чтобы скрывались
+
+\newenvironment{answerlist}{\begin{enumerate}[label=\textbf{\alph{enumi})}, itemsep=0pt, parsep=0pt, topsep=2pt, partopsep=0pt, leftmargin=0pt, itemindent=6ex, rightmargin=2pt, listparindent=\parindent]}{\end{enumerate}}
+
+\usetikzlibrary{arrows}
+
+\newcommand{\lidlskip}[1][]{\vspace{1mm}}
+
+\setlength\parindent{1.75em}
+
+\DeclareDocumentCommand\titular{ }{
+\begin{titleframe}{Теория вероятности и статистика}
+\large
+\libertine
+\flushleft{\textbf{Задачи для тренировки}} \vspace{-0.5em}
+\flushleft{\emph{\today}} \\
+\end{titleframe}
+}
+
+\newtcolorbox{question}[1][]{colback=white, left=2mm, top=1mm, bottom=1mm, right=1mm, lower separated=false, title={\Large \textbf{Задача \theprob}}, after title=\refstepcounter{prob}}
+
+\ifshowanswers
+  \newenvironment{solution}{\ifthenelse{\boolean{showanswers}}{\begin{thesolution}}{}}{\ifthenelse{\boolean{showanswers}}{\end{thesolution}}{}}
+\else
+  \excludecomment{solution}
+\fi
+
+
+\pagestyle{fancy} 
+\fancyhead{} 
+\fancyhead[C]{\large \libertine ТВиМС}
+\fancyhead[L]{\large \libertine ФЭН НИУ ВШЭ} 
+\fancyhead[R]{\large \libertine \today} 
+\fancyfoot{} 
+\fancyfoot[C]{\large \libertine \thepage}
+
+\begin{document}
+\large
+\libertine
+\titular
+
+%% \exinput{exercises}
+
+\end{document}
