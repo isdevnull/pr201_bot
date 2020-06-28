@@ -7,7 +7,7 @@ RUN python3 -m venv $VIRTUAL_ENV
 ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 RUN R -e "install.packages('exams', dependencies = TRUE)" && R -e "install.packages('ids', dependencies = TRUE)"
 COPY requirements.txt ./
-RUN pip3 install -r requirements.txt
+RUN pip3 install wheel && pip3 install -r requirements.txt
 ADD ./R ./R
 COPY ./bot.py ./config.py ./r2pygen.py ./util.py ./
 RUN tlmgr init-usertree
