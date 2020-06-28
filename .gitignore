@@ -6,3 +6,5 @@ R/__pycache__
 R/pdf
 R/probability*
 R/.vscode
+.vscode
+bot_env/
